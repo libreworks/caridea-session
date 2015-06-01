@@ -70,6 +70,11 @@ class NativeSession implements Session
         return isset($this->cookies[session_name()]);
     }
 
+    public function clear()
+    {
+        session_unset();
+    }
+    
     public function destroy()
     {
         foreach ($this->plugins as $plugin) {

@@ -44,6 +44,12 @@ class FlashPluginTest extends \PHPUnit_Framework_TestCase
             ->setMethods(['getValues'])
             ->getMockForAbstractClass();
         $session->expects($this->any())
+            ->method('start')
+            ->willReturn(true);
+        $session->expects($this->any())
+            ->method('resume')
+            ->willReturn(true);
+        $session->expects($this->any())
             ->method('getValues')
             ->willReturnCallback(function($namespace) use ($session){
                 return new Values($session, $namespace);

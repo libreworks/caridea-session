@@ -47,6 +47,20 @@ class NativeSessionTest extends \PHPUnit_Framework_TestCase
         $object2 = new NativeSession([]);
         $this->assertFalse($object2->canResume());
     }
+    
+    /**
+     * @covers Caridea\Session\NativeSession::clear
+     * @covers Caridea\Session\NativeSession::__construct
+     * @runInSeparateProcess
+     */
+    public function testClear()
+    {
+        $object = new NativeSession([]);
+        $object->start();
+        $_SESSION['foo'] = 'bar';
+        $object->clear();
+        $this->assertEmpty($_SESSION);
+    }
 
     /**
      * @covers Caridea\Session\NativeSession::destroy

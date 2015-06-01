@@ -35,6 +35,11 @@ interface Session
     public function canResume();
     
     /**
+     * Unsets all session variables, leaving the session otherwise intact.
+     */
+    public function clear();
+    
+    /**
      * Completely destroys the session.
      * 
      * @return boolean

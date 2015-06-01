@@ -31,7 +31,15 @@ class ValuesTest extends \PHPUnit_Framework_TestCase
 
     protected function setUp()
     {
-        $this->session = $this->getMock('Caridea\\Session\\Session');
+        $session = $this->getMock('Caridea\\Session\\Session');
+        $session->expects($this->any())
+            ->method('start')
+            ->willReturn(true);
+        $session->expects($this->any())
+            ->method('resume')
+            ->willReturn(true);        
+        $this->session = $session;
+        
         $_SESSION = [];
     }
     
@@ -45,6 +53,7 @@ class ValuesTest extends \PHPUnit_Framework_TestCase
      * @covers Caridea\Session\Values::offsetSet
      * @covers Caridea\Session\Values::count
      * @covers Caridea\Session\Values::clear
+     * @covers Caridea\Session\Values::resume
      */
     public function testClear()
     {
@@ -148,6 +157,9 @@ class ValuesTest extends \PHPUnit_Framework_TestCase
      * @covers Caridea\Session\Values::offsetSet
      * @covers Caridea\Session\Values::offsetGet
      * @covers Caridea\Session\Values::offsetUnset
+     * @covers Caridea\Session\Values::resume
+     * @covers Caridea\Session\Values::start
+     * @covers Caridea\Session\Values::init
      */
     public function testOffsetSetAndUnset()
     {

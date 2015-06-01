@@ -28,6 +28,10 @@ namespace Caridea\Session;
 class Values implements \Caridea\Util\Map
 {
     /**
+     * @var Session
+     */
+    protected $session;
+    /**
      * @var string
      */
     protected $name;
@@ -35,38 +39,38 @@ class Values implements \Caridea\Util\Map
     /**
      * Creates a new Session value namespace.
      * 
-     * The session will be started by this constructor.
-     * 
      * @param \Caridea\Session\Session $session The session utility
      * @param string $name The session value namespace
      */
     public function __construct(Session $session, $name)
     {
         $this->name = \Caridea\Util\Arguments::checkBlank($name, 'Session namespace cannot be blank');
-        $session->resume() || $session->start();
-        if (!isset($_SESSION[$this->name])) {
-            $_SESSION[$this->name] = [];
-        }
+        $this->session = $session;
     }
     
     public function clear()
     {
-        $_SESSION[$this->name] = [];
+        if ($this->resume()) {
+            $_SESSION[$this->name] = [];
+        }
     }
 
     public function count()
     {
+        $this->resume();
         return count($_SESSION[$this->name]);
     }
 
     public function get($offset, $alt = null)
     {
+        $this->resume();
         return isset($_SESSION[$this->name][$offset]) ?
             $_SESSION[$this->name][$offset] : $alt;
     }
     
     public function getIterator()
     {
+        $this->resume();
         return new \ArrayIterator($_SESSION[$this->name]);
     }
 
@@ -82,7 +86,9 @@ class Values implements \Caridea\Util\Map
 
     public function merge(\Caridea\Util\Map $values)
     {
+        $this->start();
         if ($values instanceof Values) {
+            $values->resume();
             $_SESSION[$this->name] = array_merge($_SESSION[$this->name], $_SESSION[$values->name]);
         } else {
             foreach($values as $k => $v) {
@@ -93,21 +99,44 @@ class Values implements \Caridea\Util\Map
     
     public function offsetExists($offset)
     {
+        $this->resume();
         return isset($_SESSION[$this->name][$offset]);
     }
 
     public function offsetGet($offset)
     {
+        $this->resume();
         return $this->get($offset);
     }
 
     public function offsetSet($offset, $value)
     {
+        $this->start();
         $_SESSION[$this->name][$offset] = $value;
     }
 
     public function offsetUnset($offset)
     {
-        unset($_SESSION[$this->name][$offset]);
+        if ($this->resume()) {
+            unset($_SESSION[$this->name][$offset]);
+        }
+    }
+    
+    protected function resume()
+    {
+        return $this->session->resume() && $this->init();
+    }
+    
+    protected function start()
+    {
+        return $this->resume() || ($this->session->start() && $this->init());
+    }
+    
+    protected function init()
+    {
+        if (!isset($_SESSION[$this->name])) {
+            $_SESSION[$this->name] = [];
+        }
+        return true;
     }
 }
