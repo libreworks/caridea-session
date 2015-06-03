@@ -40,7 +40,7 @@ class FlashPluginTest extends \PHPUnit_Framework_TestCase
     {
         $this->object = new FlashPlugin();
         
-        $session = $this->getMockBuilder('Caridea\\Session\\Session')
+        $session = $this->getMockBuilder(Session::class)
             ->setMethods(['getValues'])
             ->getMockForAbstractClass();
         $session->expects($this->any())

@@ -28,11 +28,11 @@ namespace Caridea\Session;
 class FlashPlugin extends Plugin
 {
     /**
-     * @var \Caridea\Util\Map A session value namespace for current vals
+     * @var \Caridea\Session\Map A session value namespace for current vals
      */    
     protected $curr;
     /**
-     * @var \Caridea\Util\Map A session value namespace for next vals
+     * @var \Caridea\Session\Map A session value namespace for next vals
      */    
     protected $next;
     /**
@@ -45,8 +45,8 @@ class FlashPlugin extends Plugin
      */
     public function __construct()
     {
-        $this->curr = new \Caridea\Util\NullMap();
-        $this->next = new \Caridea\Util\NullMap();
+        $this->curr = new NullMap();
+        $this->next = new NullMap();
     }
     
     /**

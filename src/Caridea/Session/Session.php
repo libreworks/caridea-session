@@ -52,7 +52,7 @@ interface Session
      * If the session isn't started, a call to this method will start it.
      * 
      * @param string $namespace The value namespace
-     * @return \Caridea\Util\Map A namespaced key-value map.
+     * @return \Caridea\Session\Map A namespaced key-value map.
      */
     public function getValues($namespace);
     

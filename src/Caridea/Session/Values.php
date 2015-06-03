@@ -25,7 +25,7 @@ namespace Caridea\Session;
  * @copyright 2015 LibreWorks contributors
  * @license   http://opensource.org/licenses/Apache-2.0 Apache 2.0 License
  */
-class Values implements \Caridea\Util\Map
+class Values implements Map
 {
     /**
      * @var Session
@@ -44,7 +44,10 @@ class Values implements \Caridea\Util\Map
      */
     public function __construct(Session $session, $name)
     {
-        $this->name = \Caridea\Util\Arguments::checkBlank($name, 'Session namespace cannot be blank');
+        if ($name === null || !strlen(trim($name))) {
+            throw new \InvalidArgumentException('Session namespace cannot be blank');
+        }
+        $this->name = $name;
         $this->session = $session;
     }
     
@@ -84,7 +87,7 @@ class Values implements \Caridea\Util\Map
         return $this->name;
     }
 
-    public function merge(\Caridea\Util\Map $values)
+    public function merge(\Caridea\Session\Map $values)
     {
         $this->start();
         if ($values instanceof Values) {

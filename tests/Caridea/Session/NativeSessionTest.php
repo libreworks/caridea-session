@@ -69,12 +69,12 @@ class NativeSessionTest extends \PHPUnit_Framework_TestCase
      */
     public function testDestroyPlugins()
     {
-        $plugin = $this->getMockBuilder('Caridea\\Session\\Plugin')
+        $plugin = $this->getMockBuilder(Plugin::class)
             ->setMethods(['onDestroy'])
             ->getMock();
         $plugin->expects($this->once())
             ->method('onDestroy')
-            ->with($this->isInstanceOf('Caridea\\Session\\NativeSession'));
+            ->with($this->isInstanceOf(NativeSession::class));
         
         $object = new NativeSession([], [$plugin]);
         $object->start();
@@ -145,7 +145,7 @@ class NativeSessionTest extends \PHPUnit_Framework_TestCase
         $namespace = 'foobar';
         $object = new NativeSession([]);
         $values = $object->getValues($namespace);
-        $this->assertInstanceOf('Caridea\\Session\\Values', $values);
+        $this->assertInstanceOf(Values::class, $values);
         $this->assertEquals($namespace, $values->getNamespace());
         $this->assertSame($values, $object->getValues($namespace));
     }
@@ -173,12 +173,12 @@ class NativeSessionTest extends \PHPUnit_Framework_TestCase
      */
     public function testStartPlugins()
     {
-        $plugin = $this->getMockBuilder('Caridea\\Session\\Plugin')
+        $plugin = $this->getMockBuilder(Plugin::class)
             ->setMethods(['onStart'])
             ->getMock();
         $plugin->expects($this->once())
             ->method('onStart')
-            ->with($this->isInstanceOf('Caridea\\Session\\NativeSession'));
+            ->with($this->isInstanceOf(NativeSession::class));
         
         $object = new NativeSession([], [$plugin]);
         $this->assertInternalType('bool', $object->start());
@@ -206,12 +206,12 @@ class NativeSessionTest extends \PHPUnit_Framework_TestCase
      */
     public function testRegeneratePlugins()
     {
-        $plugin = $this->getMockBuilder('Caridea\\Session\\Plugin')
+        $plugin = $this->getMockBuilder(Plugin::class)
             ->setMethods(['onRegenerate'])
             ->getMock();
         $plugin->expects($this->once())
             ->method('onRegenerate')
-            ->with($this->isInstanceOf('Caridea\\Session\\NativeSession'));
+            ->with($this->isInstanceOf(NativeSession::class));
         
         $object = new NativeSession([], [$plugin]);
         $object->start();

@@ -17,7 +17,7 @@
  * @copyright 2015 LibreWorks contributors
  * @license   http://opensource.org/licenses/Apache-2.0 Apache 2.0 License
  */
-namespace Caridea\Util;
+namespace Caridea\Session;
 
 /**
  * A Key-value Map.
@@ -47,7 +47,7 @@ interface Map extends \Countable, \IteratorAggregate, \ArrayAccess
      * Values in the incoming `HashTable` with identical keys will overwrite
      * those in this one.
      * 
-     * @param \Caridea\Util\Map $values The incoming values
+     * @param \Caridea\Session\Map $values The incoming values
      */
     public function merge(Map $values);
 }

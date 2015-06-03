@@ -38,8 +38,8 @@ class PluginTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->object = $this->getMockForAbstractClass('Caridea\\Session\\Plugin');
-        $this->session = $this->getMockForAbstractClass('Caridea\\Session\\Session');
+        $this->object = $this->getMockForAbstractClass(Plugin::class);
+        $this->session = $this->getMockForAbstractClass(Session::class);
     }
 
     /**

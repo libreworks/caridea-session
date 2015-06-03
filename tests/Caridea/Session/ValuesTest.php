@@ -31,7 +31,7 @@ class ValuesTest extends \PHPUnit_Framework_TestCase
 
     protected function setUp()
     {
-        $session = $this->getMock('Caridea\\Session\\Session');
+        $session = $this->getMock(Session::class);
         $session->expects($this->any())
             ->method('start')
             ->willReturn(true);
@@ -129,7 +129,7 @@ class ValuesTest extends \PHPUnit_Framework_TestCase
         
         $array = ['aoeu' => 'htns'];
         $iterator = new \ArrayIterator($array);
-        $ht = $this->getMockBuilder('Caridea\\Util\\Map')
+        $ht = $this->getMockBuilder(Map::class)
             ->setMethods(['getIterator'])
             ->getMockForAbstractClass();
         $ht->expects($this->any())

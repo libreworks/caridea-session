@@ -32,7 +32,7 @@ class CsrfPlugin extends Plugin
      */
     protected $generator;
     /**
-     * @var \Caridea\Util\Map A session value namespace
+     * @var \Caridea\Session\Map A session value namespace
      */
     protected $values;
     
@@ -50,7 +50,7 @@ class CsrfPlugin extends Plugin
     public function __construct(\Caridea\Random\Generator $generator)
     {
         $this->generator = $generator;
-        $this->values = new \Caridea\Util\NullMap();
+        $this->values = new NullMap();
     }
 
     /**
