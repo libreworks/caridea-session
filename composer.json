@@ -1,14 +1,11 @@
 {
-    "name": "libreworks/caridea",
-    "description": "A shrimp of a library",
+    "name": "caridea/session",
+    "description": "A shrimp of a session library",
     "version": "0.1.0-alpha",
     "license": "Apache-2.0",
-    "require": {
-        "psr/http-message": "1.0"
-    },
     "autoload": {
-        "psr-0": {
-          "": "src/"
+        "psr-4": {
+          "Caridea\\Session\\": "src/"
         }
     }
 }
