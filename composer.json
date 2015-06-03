@@ -1,8 +1,21 @@
 {
     "name": "caridea/session",
+    "type": "library",
     "description": "A shrimp of a session library",
-    "version": "0.1.0-alpha",
+    "keywords": ["session", "sessions", "csrf", "flash", "flash message"],
+    "version": "0.1.0",
+    "homepage": "http://github.com/libreworks/caridea-session",
     "license": "Apache-2.0",
+    "authors": [
+        {
+            "name": "Caridea Contributors",
+            "homepage": "https://github.com/libreworks/caridea-session/contributors"
+        }
+    ],
+    "require": {
+        "php": ">=5.5.0",
+	"caridea/random": "0.1.0"
+    },
     "autoload": {
         "psr-4": {
           "Caridea\\Session\\": "src/"
