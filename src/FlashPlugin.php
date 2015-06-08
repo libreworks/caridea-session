@@ -1,19 +1,19 @@
 <?php
 /**
  * Caridea
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
  * License for the specific language governing permissions and limitations under
  * the License.
- * 
+ *
  * @copyright 2015 LibreWorks contributors
  * @license   http://opensource.org/licenses/Apache-2.0 Apache 2.0 License
  */
@@ -21,7 +21,7 @@ namespace Caridea\Session;
 
 /**
  * Plugin for flash messages.
- * 
+ *
  * @copyright 2015 LibreWorks contributors
  * @license   http://opensource.org/licenses/Apache-2.0 Apache 2.0 License
  */
@@ -29,11 +29,11 @@ class FlashPlugin extends Plugin
 {
     /**
      * @var \Caridea\Session\Map A session value namespace for current vals
-     */    
+     */
     protected $curr;
     /**
      * @var \Caridea\Session\Map A session value namespace for next vals
-     */    
+     */
     protected $next;
     /**
      * @var boolean whether the values have been moved
@@ -51,7 +51,7 @@ class FlashPlugin extends Plugin
     
     /**
      * Removes any flash values for the _next_ request, optionally also in the _current_.
-     * 
+     *
      * @param bool $current If true, also clears flash values from the _current_ request.
      */
     public function clear($current = false)
@@ -64,8 +64,8 @@ class FlashPlugin extends Plugin
     
     /**
      * Gets the flash values for the _current_ request.
-     * 
-     * @return Iterator The current request flash values 
+     *
+     * @return Iterator The current request flash values
      */
     public function getAllCurrent()
     {
@@ -74,7 +74,7 @@ class FlashPlugin extends Plugin
     
     /**
      * Gets the flash values for the _next_ request.
-     * 
+     *
      * @return Iterator The next request flash values
      */
     public function getAllNext()
@@ -112,7 +112,7 @@ class FlashPlugin extends Plugin
     public function keep()
     {
         $this->next->merge($this->curr);
-    }    
+    }
     
     /**
      * Sets a flash value for the _next_ request, optionally also in the _current_ request.
@@ -134,7 +134,7 @@ class FlashPlugin extends Plugin
         $this->curr = $session->getValues(__CLASS__ . '\\CURR');
         $this->next = $session->getValues(__CLASS__ . '\\NEXT');
         $this->cycle();
-    }    
+    }
     
     protected function cycle()
     {
