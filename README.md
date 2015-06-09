@@ -1,5 +1,7 @@
 # caridea-session
-Caridea is a miniscule PHP web application library. This shrimpy fellow is what you'd use when you just want some helping hands and not a full-blown framework.
+Caridea is a miniscule PHP application library. This shrimpy fellow is what you'd use when you just want some helping hands and not a full-blown framework.
+
+![](http://libreworks.com/caridea-100.png)
 
 This is the session component. It's used for controlling sessions (e.g. starting, resuming, destroying) as well as storing namespaced values within a session.
 
