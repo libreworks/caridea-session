@@ -89,7 +89,7 @@ class NativeSessionTest extends \PHPUnit_Framework_TestCase
      */
     public function testDestroyNoCookie()
     {
-        if (!extension_loaded('xdebug')) {
+        if (!function_exists('xdebug_get_headers')) {
             $this->markTestSkipped('Xdebug required for this test');
         }
         ini_set('session.use_cookies', false);
@@ -99,7 +99,7 @@ class NativeSessionTest extends \PHPUnit_Framework_TestCase
         $object->destroy();
         $this->assertEquals(PHP_SESSION_NONE, session_status());
         echo '';
-        $headers = xdebug_get_headers();
+        $headers = headers_list();
         $found = true;
         foreach ($headers as $header) {
             if (stristr($header, 'Set-Cookie:') && stristr($header, 'deleted')) {
@@ -116,7 +116,7 @@ class NativeSessionTest extends \PHPUnit_Framework_TestCase
      */
     public function testDestroyCookie()
     {
-        if (!extension_loaded('xdebug')) {
+        if (!function_exists('xdebug_get_headers')) {
             $this->markTestSkipped('Xdebug required for this test');
         }
         $object = new NativeSession([]);

@@ -130,7 +130,8 @@ class ValuesTest extends \PHPUnit_Framework_TestCase
         $array = ['aoeu' => 'htns'];
         $iterator = new \ArrayIterator($array);
         $ht = $this->getMockBuilder(Map::class)
-            ->setMethods(['getIterator'])
+            ->setMethods(['getIterator', 'count', 'offsetExists', 'offsetGet',
+                'offsetSet', 'offsetUnset'])
             ->getMockForAbstractClass();
         $ht->expects($this->any())
             ->method('getIterator')
