@@ -7,6 +7,10 @@ This is the session component. It's used for controlling sessions (e.g. starting
 
 It supports plugins that get notified of session events. Included in this package are a CSRF prevention plugin and a "flash message" plugin.
 
+[![Build Status](https://travis-ci.org/libreworks/caridea-session.svg)](https://travis-ci.org/libreworks/caridea-session)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/libreworks/caridea-session/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/libreworks/caridea-session/?branch=master)
+[![Code Coverage](https://scrutinizer-ci.com/g/libreworks/caridea-session/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/libreworks/caridea-session/?branch=master)
+
 ## Installation
 
 You can install this library using Composer:
