@@ -28,7 +28,7 @@ namespace Caridea\Session;
 class CsrfPlugin extends Plugin
 {
     /**
-     * @var Caridea\Random\Generator A random value generator
+     * @var \Caridea\Random\Generator A random value generator
      */
     protected $generator;
     /**
