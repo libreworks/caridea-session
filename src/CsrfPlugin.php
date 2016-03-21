@@ -14,7 +14,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  *
- * @copyright 2015 LibreWorks contributors
+ * @copyright 2015-2016 LibreWorks contributors
  * @license   http://opensource.org/licenses/Apache-2.0 Apache 2.0 License
  */
 namespace Caridea\Session;
@@ -22,7 +22,7 @@ namespace Caridea\Session;
 /**
  * Stores a token to help prevent Cross-site Request Forgery.
  *
- * @copyright 2015 LibreWorks contributors
+ * @copyright 2015-2016 LibreWorks contributors
  * @license   http://opensource.org/licenses/Apache-2.0 Apache 2.0 License
  */
 class CsrfPlugin extends Plugin
@@ -57,7 +57,7 @@ class CsrfPlugin extends Plugin
      * Matches the client's CSRF token to the one stored in the session.
      *
      * @param string $value The client-supplied CSRF value
-     * @return boolean
+     * @return bool
      */
     public function isValid($value)
     {

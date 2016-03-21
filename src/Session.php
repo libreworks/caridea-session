@@ -14,7 +14,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  *
- * @copyright 2015 LibreWorks contributors
+ * @copyright 2015-2016 LibreWorks contributors
  * @license   http://opensource.org/licenses/Apache-2.0 Apache 2.0 License
  */
 namespace Caridea\Session;
@@ -22,7 +22,7 @@ namespace Caridea\Session;
 /**
  * Session abstraction
  *
- * @copyright 2015 LibreWorks contributors
+ * @copyright 2015-2016 LibreWorks contributors
  * @license   http://opensource.org/licenses/Apache-2.0 Apache 2.0 License
  */
 interface Session
@@ -30,7 +30,7 @@ interface Session
     /**
      * Whether a session had been started on a previous request.
      *
-     * @return boolean
+     * @return bool
      */
     public function canResume();
     
@@ -42,7 +42,7 @@ interface Session
     /**
      * Completely destroys the session.
      *
-     * @return boolean
+     * @return bool
      */
     public function destroy();
     
@@ -59,28 +59,28 @@ interface Session
     /**
      * Whether the session is already started.
      *
-     * @return boolean
+     * @return bool
      */
     public function isStarted();
     
     /**
      * Regenerates the session ID.
      *
-     * @return boolean
+     * @return bool
      */
     public function regenerateId();
     
     /**
      * Resumes an existing session (returns true if one is started).
      *
-     * @return boolean
+     * @return bool
      */
     public function resume();
     
     /**
      * Starts a session.
      *
-     * @return boolean
+     * @return bool
      */
     public function start();
 }
