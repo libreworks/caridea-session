@@ -11,6 +11,8 @@ It supports plugins that get notified of session events. Included in this packag
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/libreworks/caridea-session/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/libreworks/caridea-session/?branch=master)
 [![Code Coverage](https://scrutinizer-ci.com/g/libreworks/caridea-session/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/libreworks/caridea-session/?branch=master)
 
+We've also included `.hhi` files for the Hack typechecker.
+
 ## Installation
 
 You can install this library using Composer:
@@ -19,7 +21,8 @@ You can install this library using Composer:
 $ composer require caridea/session
 ```
 
-This project requires PHP 5.5 and depends on `caridea/random`.
+* The master branch (version 2.x) of this project requires PHP 7.0 and has no dependencies
+* Version 1.x of this project requires PHP 5.5 and depends on `caridea/random`.
 
 ## Compliance
 

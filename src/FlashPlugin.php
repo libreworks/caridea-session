@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 /**
  * Caridea
  *
@@ -54,7 +55,7 @@ class FlashPlugin extends Plugin
      *
      * @param bool $current If true, also clears flash values from the _current_ request.
      */
-    public function clear($current = false)
+    public function clear(bool $current = false)
     {
         if ($current) {
             $this->curr->clear();
@@ -67,7 +68,7 @@ class FlashPlugin extends Plugin
      *
      * @return Iterator The current request flash values
      */
-    public function getAllCurrent()
+    public function getAllCurrent(): \Iterator
     {
         return $this->curr->getIterator();
     }
@@ -77,7 +78,7 @@ class FlashPlugin extends Plugin
      *
      * @return Iterator The next request flash values
      */
-    public function getAllNext()
+    public function getAllNext(): \Iterator
     {
         return $this->next->getIterator();
     }
@@ -89,7 +90,7 @@ class FlashPlugin extends Plugin
      * @param mixed $alt Optional default value to return
      * @return mixed The value, or the `$alt` if not found
      */
-    public function getCurrent($name, $alt = null)
+    public function getCurrent(string $name, $alt = null)
     {
         return $this->curr->get($name, $alt);
     }
@@ -101,7 +102,7 @@ class FlashPlugin extends Plugin
      * @param mixed $alt Optional default value to return
      * @return mixed The value, or the `$alt` if not found
      */
-    public function getNext($name, $alt = null)
+    public function getNext(string $name, $alt = null)
     {
         return $this->next->get($name, $alt);
     }
@@ -121,7 +122,7 @@ class FlashPlugin extends Plugin
      * @param mixed $value The value
      * @param bool $current If true, also sets flash value for the _current_ request.
      */
-    public function set($name, $value, $current = false)
+    public function set(string $name, $value, bool $current = false)
     {
         if ($current) {
             $this->curr->offsetSet($name, $value);

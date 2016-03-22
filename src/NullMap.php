@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 /**
  * Caridea
  *
@@ -31,17 +32,17 @@ class NullMap implements Map
     {
     }
 
-    public function count()
+    public function count(): int
     {
         return 0;
     }
 
-    public function get($key, $alt = null)
+    public function get(string $key, $alt = null)
     {
         return $alt;
     }
 
-    public function getIterator()
+    public function getIterator(): \Iterator
     {
         return new \EmptyIterator();
     }
@@ -50,7 +51,7 @@ class NullMap implements Map
     {
     }
     
-    public function offsetExists($offset)
+    public function offsetExists($offset): bool
     {
         return false;
     }

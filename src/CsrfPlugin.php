@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 /**
  * Caridea
  *
@@ -28,28 +29,15 @@ namespace Caridea\Session;
 class CsrfPlugin extends Plugin
 {
     /**
-     * @var \Caridea\Random\Generator A random value generator
-     */
-    protected $generator;
-    /**
      * @var \Caridea\Session\Map A session value namespace
      */
     protected $values;
     
     /**
      * Creates a new CSRF plugin.
-     *
-     * For example, to create a plugin using the Mcrypt CSRNG:
-     *
-     * ```php
-     * $csrf = new \Caridea\Session\CsrfPlugin(new \Caridea\Random\Mcrypt());
-     * ```
-     *
-     * @param \Caridea\Random\Generator $generator A random value generator
      */
-    public function __construct(\Caridea\Random\Generator $generator)
+    public function __construct()
     {
-        $this->generator = $generator;
         $this->values = new NullMap();
     }
 
@@ -59,7 +47,7 @@ class CsrfPlugin extends Plugin
      * @param string $value The client-supplied CSRF value
      * @return bool
      */
-    public function isValid($value)
+    public function isValid(string $value): bool
     {
         return $value === $this->getValue();
     }
@@ -67,7 +55,7 @@ class CsrfPlugin extends Plugin
     /**
      * Gets the session CSRF token
      *
-     * @return string The CSRF token
+     * @return string The CSRF token (or null)
      */
     public function getValue()
     {
@@ -76,7 +64,7 @@ class CsrfPlugin extends Plugin
     
     protected function regenerate()
     {
-        $this->values->offsetSet('value', hash('sha512', $this->generator->generate(32)));
+        $this->values->offsetSet('value', hash('sha512', random_bytes(32)));
     }
     
     public function onRegenerate(Session $session)

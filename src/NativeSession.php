@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 /**
  * Caridea
  *
@@ -65,7 +66,7 @@ class NativeSession implements Session
         }
     }
     
-    public function canResume()
+    public function canResume(): bool
     {
         return isset($this->cookies[session_name()]);
     }
@@ -75,7 +76,7 @@ class NativeSession implements Session
         session_unset();
     }
     
-    public function destroy()
+    public function destroy(): bool
     {
         foreach ($this->plugins as $plugin) {
             /* @var $plugin Plugin */
@@ -97,7 +98,7 @@ class NativeSession implements Session
         return session_destroy();
     }
     
-    public function getValues($namespace)
+    public function getValues(string $namespace): Map
     {
         if (!isset($this->values[$namespace])) {
             $this->values[$namespace] = new Values($this, $namespace);
@@ -105,12 +106,12 @@ class NativeSession implements Session
         return $this->values[$namespace];
     }
 
-    public function isStarted()
+    public function isStarted(): bool
     {
         return session_status() === PHP_SESSION_ACTIVE;
     }
 
-    public function regenerateId()
+    public function regenerateId(): bool
     {
         foreach ($this->plugins as $plugin) {
             /* @var $plugin Plugin */
@@ -119,7 +120,7 @@ class NativeSession implements Session
         return session_regenerate_id(true);
     }
 
-    public function resume()
+    public function resume(): bool
     {
         if ($this->isStarted()) {
             return true;
@@ -128,7 +129,7 @@ class NativeSession implements Session
         }
     }
 
-    public function start()
+    public function start(): bool
     {
         $start = session_start();
         if ($start) {

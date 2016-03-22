@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 /**
  * Caridea
  *
@@ -39,7 +40,7 @@ interface Map extends \Countable, \IteratorAggregate, \ArrayAccess
      * @param mixed $alt Optional default value to return
      * @return mixed The value, or the `$alt` if not found
      */
-    public function get($key, $alt = null);
+    public function get(string $key, $alt = null);
     
     /**
      * Adds all key-value pairs from the supplied `$values` to this one.

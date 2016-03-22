@@ -42,7 +42,7 @@ class Values implements Map
      * @param \Caridea\Session\Session $session The session utility
      * @param string $name The session value namespace
      */
-    public function __construct(Session $session, $name)
+    public function __construct(Session $session, string $name)
     {
         if ($name === null || !strlen(trim($name))) {
             throw new \InvalidArgumentException('Session namespace cannot be blank');
@@ -58,20 +58,20 @@ class Values implements Map
         }
     }
 
-    public function count()
+    public function count(): int
     {
         $this->resume();
         return count($_SESSION[$this->name]);
     }
 
-    public function get($offset, $alt = null)
+    public function get(string $offset, $alt = null)
     {
         $this->resume();
         return isset($_SESSION[$this->name][$offset]) ?
             $_SESSION[$this->name][$offset] : $alt;
     }
     
-    public function getIterator()
+    public function getIterator(): \Iterator
     {
         $this->resume();
         return new \ArrayIterator($_SESSION[$this->name]);
@@ -82,7 +82,7 @@ class Values implements Map
      *
      * @return string The values namespace
      */
-    public function getNamespace()
+    public function getNamespace(): string
     {
         return $this->name;
     }
@@ -100,7 +100,7 @@ class Values implements Map
         }
     }
     
-    public function offsetExists($offset)
+    public function offsetExists($offset): bool
     {
         $this->resume();
         return isset($_SESSION[$this->name][$offset]);
@@ -125,17 +125,17 @@ class Values implements Map
         }
     }
     
-    protected function resume()
+    protected function resume(): bool
     {
         return $this->session->resume() && $this->init();
     }
     
-    protected function start()
+    protected function start(): bool
     {
         return $this->resume() || ($this->session->start() && $this->init());
     }
     
-    protected function init()
+    protected function init(): bool
     {
         if (!isset($_SESSION[$this->name])) {
             $_SESSION[$this->name] = [];

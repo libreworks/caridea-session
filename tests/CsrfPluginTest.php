@@ -29,10 +29,6 @@ class CsrfPluginTest extends \PHPUnit_Framework_TestCase
      */
     protected $object;
     /**
-     * @var \Caridea\Random\Generator
-     */
-    protected $generator;
-    /**
      * @var Session
      */
     protected $session;
@@ -42,17 +38,7 @@ class CsrfPluginTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $generator = $this->getMockBuilder(\Caridea\Random\Generator::class)
-            ->setMethods(['generate'])
-            ->getMockForAbstractClass();
-        $generator->expects($this->any())
-            ->method('generate')
-            ->willReturnCallback(function ($length) {
-                return str_pad((string)mt_rand(0, 1000), $length, '1');
-            });
-        $this->generator = $generator;
-        
-        $this->object = new CsrfPlugin($generator);
+        $this->object = new CsrfPlugin();
         
         $session = $this->getMockBuilder(Session::class)
             ->setMethods(['getValues'])

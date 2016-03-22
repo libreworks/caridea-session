@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 /**
  * Caridea
  *
@@ -32,7 +33,7 @@ interface Session
      *
      * @return bool
      */
-    public function canResume();
+    public function canResume(): bool;
     
     /**
      * Unsets all session variables, leaving the session otherwise intact.
@@ -44,7 +45,7 @@ interface Session
      *
      * @return bool
      */
-    public function destroy();
+    public function destroy(): bool;
     
     /**
      * Gets a namespaced set of keys to values.
@@ -54,33 +55,33 @@ interface Session
      * @param string $namespace The value namespace
      * @return \Caridea\Session\Map A namespaced key-value map.
      */
-    public function getValues($namespace);
+    public function getValues(string $namespace): Map;
     
     /**
      * Whether the session is already started.
      *
      * @return bool
      */
-    public function isStarted();
+    public function isStarted(): bool;
     
     /**
      * Regenerates the session ID.
      *
      * @return bool
      */
-    public function regenerateId();
+    public function regenerateId(): bool;
     
     /**
      * Resumes an existing session (returns true if one is started).
      *
      * @return bool
      */
-    public function resume();
+    public function resume(): bool;
     
     /**
      * Starts a session.
      *
      * @return bool
      */
-    public function start();
+    public function start(): bool;
 }
