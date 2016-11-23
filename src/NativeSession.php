@@ -40,7 +40,7 @@ class NativeSession implements Session
      * @var \SplObjectStorage
      */
     protected $plugins;
-    
+
     /**
      * Creates a new native session utility.
      *
@@ -65,7 +65,7 @@ class NativeSession implements Session
             }
         }
     }
-    
+
     public function canResume(): bool
     {
         return isset($this->cookies[session_name()]);
@@ -75,10 +75,10 @@ class NativeSession implements Session
     {
         session_unset();
     }
-    
+
     public function destroy(): bool
     {
-        foreach ($this->plugins as $plugin) {
+        foreach (iterator_to_array($this->plugins) as $plugin) {
             /* @var $plugin Plugin */
             $plugin->onDestroy($this);
         }
@@ -97,7 +97,7 @@ class NativeSession implements Session
         }
         return session_destroy();
     }
-    
+
     public function getValues(string $namespace): Map
     {
         if (!isset($this->values[$namespace])) {
@@ -113,7 +113,7 @@ class NativeSession implements Session
 
     public function regenerateId(): bool
     {
-        foreach ($this->plugins as $plugin) {
+        foreach (iterator_to_array($this->plugins) as $plugin) {
             /* @var $plugin Plugin */
             $plugin->onRegenerate($this);
         }
@@ -133,7 +133,7 @@ class NativeSession implements Session
     {
         $start = session_start();
         if ($start) {
-            foreach ($this->plugins as $plugin) {
+            foreach (iterator_to_array($this->plugins) as $plugin) {
                 /* @var $plugin Plugin */
                 $plugin->onStart($this);
             }

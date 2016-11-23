@@ -11,6 +11,11 @@
             "homepage": "https://github.com/libreworks/caridea-session/contributors"
         }
     ],
+    "extra": {
+        "branch-alias": {
+            "dev-master": "2.0.x-dev"
+        }
+    },
     "require": {
         "php": ">=7.0.0"
     },

@@ -31,7 +31,7 @@ class ValuesTest extends \PHPUnit_Framework_TestCase
 
     protected function setUp()
     {
-        $session = $this->getMock(Session::class);
+        $session = $this->createMock(Session::class);
         $session->expects($this->any())
             ->method('start')
             ->willReturn(true);
@@ -39,10 +39,10 @@ class ValuesTest extends \PHPUnit_Framework_TestCase
             ->method('resume')
             ->willReturn(true);
         $this->session = $session;
-        
+
         $_SESSION = [];
     }
-    
+
     protected function tearDown()
     {
         $_SESSION = [];
@@ -116,7 +116,6 @@ class ValuesTest extends \PHPUnit_Framework_TestCase
     /**
      * @covers Caridea\Session\Values::__construct
      * @covers Caridea\Session\Values::merge
-     * @todo   Implement testMerge().
      */
     public function testMerge()
     {
@@ -126,7 +125,7 @@ class ValuesTest extends \PHPUnit_Framework_TestCase
         $object2 = new Values($this->session, 'def');
         $object1->merge($object2);
         $this->assertTrue($object1->offsetExists('bar'));
-        
+
         $array = ['aoeu' => 'htns'];
         $iterator = new \ArrayIterator($array);
         $ht = $this->getMockBuilder(Map::class)
