@@ -39,7 +39,7 @@ Creating a Session.
 
 ```php
 // When the session starts, a CSRF token will be created and stored
-$csrf = new \Caridea\Session\CsrfPlugin(new \Caridea\Random\Mcrypt());
+$csrf = new \Caridea\Session\CsrfPlugin();
 // Display-once messages can be added using the flash plugin
 $flash = new \Caridea\Session\FlashPlugin();
 $session = new \Caridea\Session\NativeSession($_COOKIE, [$csrf, $flash]);
