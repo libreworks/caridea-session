@@ -4,6 +4,6 @@
 
 This is the session component. It's used for controlling sessions (e.g. starting, resuming, destroying) as well as storing namespaced values within a session.
 
-* [Session Abstraction](session.md)
-* [Namespaced Values](values.md)
-* [Event Plugins](plugins.md)
+* [Session Abstraction](01-session.md)
+* [Namespaced Values](02-values.md)
+* [Event Plugins](03-plugins.md)
