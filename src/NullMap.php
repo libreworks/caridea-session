@@ -15,56 +15,83 @@ declare(strict_types=1);
  * License for the specific language governing permissions and limitations under
  * the License.
  *
- * @copyright 2015-2016 LibreWorks contributors
- * @license   http://opensource.org/licenses/Apache-2.0 Apache 2.0 License
+ * @copyright 2015-2018 LibreWorks contributors
+ * @license   Apache-2.0
  */
 namespace Caridea\Session;
 
 /**
  * A no-op key-value Map.
  *
- * @copyright 2015-2016 LibreWorks contributors
- * @license   http://opensource.org/licenses/Apache-2.0 Apache 2.0 License
+ * @copyright 2015-2018 LibreWorks contributors
+ * @license   Apache-2.0
  */
 class NullMap implements Map
 {
-    public function clear()
+    /**
+     * {@inheritDoc}
+     */
+    public function clear(): void
     {
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function count(): int
     {
         return 0;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function get(string $key, $alt = null)
     {
         return $alt;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function getIterator(): \Iterator
     {
         return new \EmptyIterator();
     }
 
-    public function merge(Map $values)
+    /**
+     * {@inheritDoc}
+     */
+    public function merge(Map $values): void
     {
     }
-    
+
+    /**
+     * {@inheritDoc}
+     */
     public function offsetExists($offset): bool
     {
         return false;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function offsetGet($offset)
     {
         return null;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function offsetSet($offset, $value)
     {
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function offsetUnset($offset)
     {
     }

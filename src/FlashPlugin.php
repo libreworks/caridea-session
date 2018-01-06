@@ -15,16 +15,16 @@ declare(strict_types=1);
  * License for the specific language governing permissions and limitations under
  * the License.
  *
- * @copyright 2015-2016 LibreWorks contributors
- * @license   http://opensource.org/licenses/Apache-2.0 Apache 2.0 License
+ * @copyright 2015-2018 LibreWorks contributors
+ * @license   Apache-2.0
  */
 namespace Caridea\Session;
 
 /**
  * Plugin for flash messages.
  *
- * @copyright 2015-2016 LibreWorks contributors
- * @license   http://opensource.org/licenses/Apache-2.0 Apache 2.0 License
+ * @copyright 2015-2018 LibreWorks contributors
+ * @license   Apache-2.0
  */
 class FlashPlugin extends Plugin
 {
@@ -49,40 +49,40 @@ class FlashPlugin extends Plugin
         $this->curr = new NullMap();
         $this->next = new NullMap();
     }
-    
+
     /**
      * Removes any flash values for the _next_ request, optionally also in the _current_.
      *
      * @param bool $current If true, also clears flash values from the _current_ request.
      */
-    public function clear(bool $current = false)
+    public function clear(bool $current = false): void
     {
         if ($current) {
             $this->curr->clear();
         }
         $this->next->clear();
     }
-    
+
     /**
      * Gets the flash values for the _current_ request.
      *
-     * @return Iterator The current request flash values
+     * @return \Iterator The current request flash values
      */
     public function getAllCurrent(): \Iterator
     {
         return $this->curr->getIterator();
     }
-    
+
     /**
      * Gets the flash values for the _next_ request.
      *
-     * @return Iterator The next request flash values
+     * @return \Iterator The next request flash values
      */
     public function getAllNext(): \Iterator
     {
         return $this->next->getIterator();
     }
-    
+
     /**
      * Gets the flash value for a key in the _current_ request.
      *
@@ -106,15 +106,15 @@ class FlashPlugin extends Plugin
     {
         return $this->next->get($name, $alt);
     }
-    
+
     /**
      * Repeats any values in the current flash step in the next step.
      */
-    public function keep()
+    public function keep(): void
     {
         $this->next->merge($this->curr);
     }
-    
+
     /**
      * Sets a flash value for the _next_ request, optionally also in the _current_ request.
      *
@@ -122,21 +122,27 @@ class FlashPlugin extends Plugin
      * @param mixed $value The value
      * @param bool $current If true, also sets flash value for the _current_ request.
      */
-    public function set(string $name, $value, bool $current = false)
+    public function set(string $name, $value, bool $current = false): void
     {
         if ($current) {
             $this->curr->offsetSet($name, $value);
         }
         $this->next->offsetSet($name, $value);
     }
-    
-    public function onStart(Session $session)
+
+    /**
+     * {@inheritDoc}
+     */
+    public function onStart(Session $session): void
     {
         $this->curr = $session->getValues(__CLASS__ . '\\CURR');
         $this->next = $session->getValues(__CLASS__ . '\\NEXT');
         $this->cycle();
     }
-    
+
+    /**
+     * Transitions the values from next to current.
+     */
     protected function cycle()
     {
         if (!$this->moved) {

@@ -15,16 +15,16 @@ declare(strict_types=1);
  * License for the specific language governing permissions and limitations under
  * the License.
  *
- * @copyright 2015-2016 LibreWorks contributors
- * @license   http://opensource.org/licenses/Apache-2.0 Apache 2.0 License
+ * @copyright 2015-2018 LibreWorks contributors
+ * @license   Apache-2.0
  */
 namespace Caridea\Session;
 
 /**
  * Stores a token to help prevent Cross-site Request Forgery.
  *
- * @copyright 2015-2016 LibreWorks contributors
- * @license   http://opensource.org/licenses/Apache-2.0 Apache 2.0 License
+ * @copyright 2015-2018 LibreWorks contributors
+ * @license   Apache-2.0
  */
 class CsrfPlugin extends Plugin
 {
@@ -32,7 +32,7 @@ class CsrfPlugin extends Plugin
      * @var \Caridea\Session\Map A session value namespace
      */
     protected $values;
-    
+
     /**
      * Creates a new CSRF plugin.
      */
@@ -51,28 +51,37 @@ class CsrfPlugin extends Plugin
     {
         return $value === $this->getValue();
     }
-    
+
     /**
      * Gets the session CSRF token
      *
-     * @return string The CSRF token (or null)
+     * @return string|null The CSRF token (or null)
      */
-    public function getValue()
+    public function getValue(): ?string
     {
         return $this->values->get('value');
     }
-    
-    protected function regenerate()
+
+    /**
+     * Recalculates the hash
+     */
+    protected function regenerate(): void
     {
         $this->values->offsetSet('value', hash('sha512', random_bytes(32)));
     }
-    
-    public function onRegenerate(Session $session)
+
+    /**
+     * {@inheritDoc}
+     */
+    public function onRegenerate(Session $session): void
     {
         $this->regenerate();
     }
 
-    public function onStart(Session $session)
+    /**
+     * {@inheritDoc}
+     */
+    public function onStart(Session $session): void
     {
         $this->values = $session->getValues(__CLASS__);
         if (!$this->values->get('value')) {

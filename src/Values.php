@@ -14,16 +14,16 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  *
- * @copyright 2015-2016 LibreWorks contributors
- * @license   http://opensource.org/licenses/Apache-2.0 Apache 2.0 License
+ * @copyright 2015-2018 LibreWorks contributors
+ * @license   Apache-2.0
  */
 namespace Caridea\Session;
 
 /**
  * Session value namespace
  *
- * @copyright 2015-2016 LibreWorks contributors
- * @license   http://opensource.org/licenses/Apache-2.0 Apache 2.0 License
+ * @copyright 2015-2018 LibreWorks contributors
+ * @license   Apache-2.0
  */
 class Values implements Map
 {
@@ -35,7 +35,7 @@ class Values implements Map
      * @var string
      */
     protected $name;
-    
+
     /**
      * Creates a new Session value namespace.
      *
@@ -50,27 +50,39 @@ class Values implements Map
         $this->name = $name;
         $this->session = $session;
     }
-    
-    public function clear()
+
+    /**
+     * {@inheritDoc}
+     */
+    public function clear(): void
     {
         if ($this->resume()) {
             $_SESSION[$this->name] = [];
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function count(): int
     {
         $this->resume();
         return count($_SESSION[$this->name]);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function get(string $offset, $alt = null)
     {
         $this->resume();
         return isset($_SESSION[$this->name][$offset]) ?
             $_SESSION[$this->name][$offset] : $alt;
     }
-    
+
+    /**
+     * {@inheritDoc}
+     */
     public function getIterator(): \Iterator
     {
         $this->resume();
@@ -87,7 +99,10 @@ class Values implements Map
         return $this->name;
     }
 
-    public function merge(\Caridea\Session\Map $values)
+    /**
+     * {@inheritDoc}
+     */
+    public function merge(\Caridea\Session\Map $values): void
     {
         $this->start();
         if ($values instanceof Values) {
@@ -99,42 +114,69 @@ class Values implements Map
             }
         }
     }
-    
+
+    /**
+     * {@inheritDoc}
+     */
     public function offsetExists($offset): bool
     {
         $this->resume();
         return isset($_SESSION[$this->name][$offset]);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function offsetGet($offset)
     {
         $this->resume();
         return $this->get($offset);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function offsetSet($offset, $value)
     {
         $this->start();
         $_SESSION[$this->name][$offset] = $value;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function offsetUnset($offset)
     {
         if ($this->resume()) {
             unset($_SESSION[$this->name][$offset]);
         }
     }
-    
+
+    /**
+     * Resumes the session.
+     *
+     * @return bool  Whether the session resumed successfully
+     */
     protected function resume(): bool
     {
         return $this->session->resume() && $this->init();
     }
-    
+
+    /**
+     * Starts the session, trying to resume it first.
+     *
+     * @return bool  Whether the session started successfully
+     */
     protected function start(): bool
     {
         return $this->resume() || ($this->session->start() && $this->init());
     }
-    
+
+    /**
+     * Initializes the session.
+     *
+     * @return bool  Always `true`
+     */
     protected function init(): bool
     {
         if (!isset($_SESSION[$this->name])) {

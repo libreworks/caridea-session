@@ -15,16 +15,16 @@ declare(strict_types=1);
  * License for the specific language governing permissions and limitations under
  * the License.
  *
- * @copyright 2015-2016 LibreWorks contributors
- * @license   http://opensource.org/licenses/Apache-2.0 Apache 2.0 License
+ * @copyright 2015-2018 LibreWorks contributors
+ * @license   Apache-2.0
  */
 namespace Caridea\Session;
 
 /**
  * Session abstraction using PHP's native session functions
  *
- * @copyright 2015-2016 LibreWorks contributors
- * @license   http://opensource.org/licenses/Apache-2.0 Apache 2.0 License
+ * @copyright 2015-2018 LibreWorks contributors
+ * @license   Apache-2.0
  */
 class NativeSession implements Session
 {
@@ -66,16 +66,25 @@ class NativeSession implements Session
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function canResume(): bool
     {
         return isset($this->cookies[session_name()]);
     }
 
-    public function clear()
+    /**
+     * {@inheritDoc}
+     */
+    public function clear(): void
     {
         session_unset();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function destroy(): bool
     {
         foreach (iterator_to_array($this->plugins) as $plugin) {
@@ -98,6 +107,9 @@ class NativeSession implements Session
         return session_destroy();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function getValues(string $namespace): Map
     {
         if (!isset($this->values[$namespace])) {
@@ -106,11 +118,17 @@ class NativeSession implements Session
         return $this->values[$namespace];
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function isStarted(): bool
     {
         return session_status() === PHP_SESSION_ACTIVE;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function regenerateId(): bool
     {
         foreach (iterator_to_array($this->plugins) as $plugin) {
@@ -120,6 +138,9 @@ class NativeSession implements Session
         return session_regenerate_id(true);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function resume(): bool
     {
         if ($this->isStarted()) {
@@ -129,6 +150,9 @@ class NativeSession implements Session
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function start(): bool
     {
         $start = session_start();

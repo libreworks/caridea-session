@@ -15,23 +15,23 @@ declare(strict_types=1);
  * License for the specific language governing permissions and limitations under
  * the License.
  *
- * @copyright 2015-2016 LibreWorks contributors
- * @license   http://opensource.org/licenses/Apache-2.0 Apache 2.0 License
+ * @copyright 2015-2018 LibreWorks contributors
+ * @license   Apache-2.0
  */
 namespace Caridea\Session;
 
 /**
  * A Key-value Map.
  *
- * @copyright 2015-2016 LibreWorks contributors
- * @license   http://opensource.org/licenses/Apache-2.0 Apache 2.0 License
+ * @copyright 2015-2018 LibreWorks contributors
+ * @license   Apache-2.0
  */
 interface Map extends \Countable, \IteratorAggregate, \ArrayAccess
 {
     /**
      * Removes all values.
      */
-    public function clear();
+    public function clear(): void;
 
     /**
      * Gets a single value, or return `$alt` if not found.
@@ -41,7 +41,7 @@ interface Map extends \Countable, \IteratorAggregate, \ArrayAccess
      * @return mixed The value, or the `$alt` if not found
      */
     public function get(string $key, $alt = null);
-    
+
     /**
      * Adds all key-value pairs from the supplied `$values` to this one.
      *
@@ -50,5 +50,5 @@ interface Map extends \Countable, \IteratorAggregate, \ArrayAccess
      *
      * @param \Caridea\Session\Map $values The incoming values
      */
-    public function merge(Map $values);
+    public function merge(Map $values): void;
 }

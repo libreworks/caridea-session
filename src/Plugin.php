@@ -15,16 +15,16 @@ declare(strict_types=1);
  * License for the specific language governing permissions and limitations under
  * the License.
  *
- * @copyright 2015-2016 LibreWorks contributors
- * @license   http://opensource.org/licenses/Apache-2.0 Apache 2.0 License
+ * @copyright 2015-2018 LibreWorks contributors
+ * @license   Apache-2.0
  */
 namespace Caridea\Session;
 
 /**
  * Session event plugin
  *
- * @copyright 2015-2016 LibreWorks contributors
- * @license   http://opensource.org/licenses/Apache-2.0 Apache 2.0 License
+ * @copyright 2015-2018 LibreWorks contributors
+ * @license   Apache-2.0
  */
 abstract class Plugin
 {
@@ -33,25 +33,25 @@ abstract class Plugin
      *
      * @param \Caridea\Session\Session $session The session that was started
      */
-    public function onStart(Session $session)
+    public function onStart(Session $session): void
     {
     }
-    
+
     /**
      * Called immediately before a session ID is regenerated.
      *
      * @param \Caridea\Session\Session $session The session that was regenerated
      */
-    public function onRegenerate(Session $session)
+    public function onRegenerate(Session $session): void
     {
     }
-    
+
     /**
      * Called immediately before a session is destroyed.
      *
      * @param \Caridea\Session\Session $session The session that was destroyed
      */
-    public function onDestroy(Session $session)
+    public function onDestroy(Session $session): void
     {
     }
 }
